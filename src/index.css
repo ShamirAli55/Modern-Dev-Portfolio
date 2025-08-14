@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@layer components{
+  .butn
+  {
+    padding: .7vw 1.5vw;
+    border-radius: 100px;
+    border: 1px solid rgba(0, 0, 0, 0.516);
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+  }
+  .butn::after
+  {
+    content:"";
+    background-color: black;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: 0%;
+    top:110%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .butn:hover::after
+  {
+    top: 0%;
+    transition: top 0.3s ease-in-out;
+  }
+  .goeey
+  {
+    animation-name: gooey;
+    animation-timing-function: ease-in-out;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    filter: blur(50px);
+  }
+  .banner
+  {
+    animation-name: slider;
+    animation-timing-function:linear;
+    animation-duration:10s;
+    animation-iteration-count: infinite;
+  }
+  .dot
+  {
+    @apply h-20 w-20 bg-red-600 rounded-full mx-6;
+  }
+  @keyframes slider {
+    from
+    {
+      transform: translateX(0%);
+    }
+    to
+    {
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes gooey {
+    0%
+    {
+      transform: skewX(-20deg);
+    }
+    100% 
+    {
+      transform: skewX(30deg);
+    }
+  }
+}
