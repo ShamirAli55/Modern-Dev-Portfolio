@@ -1,72 +1,149 @@
 @import "tailwindcss";
 
-@layer components{
-  .butn
-  {
-    padding: .7vw 1.5vw;
-    border-radius: 100px;
-    border: 1px solid rgba(0, 0, 0, 0.516);
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 2;
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/otf/Amiamie-Regular.otf") format("opentype"),
+    url("/fonts/ttf/Amiamie-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/otf/Amiamie-Italic.otf") format("opentype"),
+    url("/fonts/ttf/Amiamie-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/otf/Amiamie-Light.otf") format("opentype"),
+    url("/fonts/ttf/Amiamie-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/otf/Amiamie-LightItalic.otf") format("opentype"),
+    url("/fonts/ttf/Amiamie-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/otf/Amiamie-Black.otf") format("opentype"),
+    url("/fonts/ttf/Amiamie-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/otf/Amiamie-BlackItalic.otf") format("opentype"),
+    url("/fonts/ttf/Amiamie-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie-Round";
+  src: url("/fonts/otf/Amiamie-RegularRound.otf") format("opentype"),
+    url("/fonts/ttf/Amiamie-RegularRound.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie-Round";
+  src: url("/fonts/otf/Amiamie-BlackRound.otf") format("opentype"),
+    url("/fonts/ttf/Amiamie-BlackRound.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie-Round";
+  src: url("/fonts/otf/Amiamie-BlackItalicRound.otf") format("opentype"),
+    url("/fonts/ttf/Amiamie-BlackItalicRound.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@theme {
+  --color-primary: #e5e5e0;
+  --color-DarkLava: #393632;
+  --color-SageGray: #8b8b73;
+  --color-gold: #cfa355;
+  --font-amiamie: "Amiamie", sans-serif;
+  --font-amiamie-round: "Amiamie-Round", sans-serif;
+
+  --animate-marquee: marquee 40s infinite linear;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
   }
-  .butn::after
+}
+
+body {
+  background: #e5e5e0;
+  color: black;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: var(--font-amiamie);
+}
+
+@utility clip-path {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+}
+
+@utility banner-text-responsive {
+  @apply text-[68px] sm:text-[118px] md:text-[126px] lg:text-[152px] leading-9 sm:leading-16 lg:leading-20;
+}
+
+@utility value-text-responsive {
+  @apply text-2xl md:text-[26px] lg:text-[32px];
+}
+
+@utility marquee-text-responsive {
+  @apply text-[28px] sm:text-[36px] lg:text-[42px];
+}
+
+@utility contact-text-responsive {
+  @apply text-[42px] sm:text-[52px] md:text-[62px] lg:text-[100px];
+}
+
+@layer utilities {
+  .mouse-ovr::after
   {
+    @apply md:mr-6 md:mx-5;
     content:"";
-    background-color: black;
     position: absolute;
-    height: 100%;
-    width: 100%;
-    right: 0%;
-    top:110%;
-    pointer-events: none;
-    z-index: -1;
-  }
-  .butn:hover::after
+    top:80%;
+    left:10px;
+    right: 20px;
+    height: 10px;
+    width:0%;
+    border-bottom: 4px solid #e5e5e0;
+    transition: all 0.4s ease-in-out;
+}
+  .mouse-ovr:hover::after
   {
-    top: 0%;
-    transition: top 0.3s ease-in-out;
-  }
-  .goeey
-  {
-    animation-name: gooey;
-    animation-timing-function: ease-in-out;
-    animation-duration: 8s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    filter: blur(50px);
-  }
-  .banner
-  {
-    animation-name: slider;
-    animation-timing-function:linear;
-    animation-duration:10s;
-    animation-iteration-count: infinite;
-  }
-  .dot
-  {
-    @apply h-20 w-20 bg-red-600 rounded-full mx-6;
-  }
-  @keyframes slider {
-    from
-    {
-      transform: translateX(0%);
-    }
-    to
-    {
-      transform: translateX(-100%);
-    }
-  }
-  @keyframes gooey {
-    0%
-    {
-      transform: skewX(-20deg);
-    }
-    100% 
-    {
-      transform: skewX(30deg);
-    }
+    @apply md:w-1/2 w-[80%];
+    transform-origin: left;
   }
 }
