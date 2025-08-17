@@ -55,9 +55,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <section className="h-screen w-screen overflow-hidden fixed z-40 inset-0">
+    <>
       <nav
-        className="h-full w-[60%] md:w-1/2 bg-black fixed z-30 right-0 py-16 px-2"
+        className="h-screen w-[60%] md:w-1/2 bg-black fixed z-30 right-0 py-16 px-2"
         ref={NavRef}
       >
         <div>
@@ -83,7 +83,7 @@ const Navbar = () => {
           ref={BottomLine}
         ></span>
       </div>
-    </section>
+    </>
   );
 };
 

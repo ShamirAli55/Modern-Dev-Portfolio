@@ -158,4 +158,10 @@ body {
   {
     @apply w-[70%] md:w-[47%];
   }
+  .gradient
+  {
+    background: linear-gradient(to right, #ffb941, #dc7d09);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
