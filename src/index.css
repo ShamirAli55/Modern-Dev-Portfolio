@@ -143,7 +143,19 @@ body {
 }
   .mouse-ovr:hover::after
   {
-    @apply md:w-1/2 w-[80%];
+    @apply md:w-[45%] w-[70%];
     transform-origin: left;
+  }
+  .mouse-ovr:nth-child(1):hover::after
+  {
+    @apply w-[50%] md:w-[35%];
+  }
+    .mouse-ovr:nth-child(2):hover::after
+  {
+    @apply w-[52%] md:w-[35%];
+  }
+    .mouse-ovr:nth-child(3):hover::after
+  {
+    @apply w-[70%] md:w-[47%];
   }
 }
