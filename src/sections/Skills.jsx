@@ -122,7 +122,7 @@ function SkillsSection() {
                 {filteredSkills.map((skill,index)=>{
                     return <div key={index} className='bg-white/30 p-6 rounded-lg shadow-xs cursor-pointer hover:scale-105 transition-all duration-300'>
                         <div className='text-left mb-4'>
-                        <h3 className='font-semibold text-lg'>{skill.name}</h3>
+                        <h3 className='text-lg'>{skill.name}</h3>
                         </div>
                         <div className='w-full bg-secondary/50 h-2 rounded-full overflow-hidden'>
                         <div className='bg-DarkLava h-2 rounded-full origin-left animate-[grow_1.5s_ease-out'

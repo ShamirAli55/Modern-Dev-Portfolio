@@ -79,12 +79,12 @@ const Contact = () => {
           ref={stringRef}
         >
           <svg
-            width="560"
+            width="530"
             height="160"
             className="hidden md:inline-block pointer-events-none"
           >
             <path
-              d="M 50 100 Q 10 100 560 100"
+              d="M 50 100 Q 10 100 530 100"
               stroke="white"
               fill="transparent"
               ref={svgPathRefDesktop}
