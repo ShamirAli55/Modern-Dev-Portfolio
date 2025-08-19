@@ -82,7 +82,7 @@ const About = () => {
   <div className="min-h-screen w-full flex flex-col md:flex-row text-center md:text-left md:px-10 pt-10 md:pt-0 container">
   
 
-  <div className="w-full md:w-1/2 px-4 md:px-20 py-6 md:py-16 md:pt-38 md:pr-33 flex flex-col gap-6">
+  <div className="w-full md:w-1/2 px-4 md:px-20 py-6 md:py-16 md:pt-38 md:pr-33 flex flex-col gap-6 text-center">
     <h1 className="text-lg md:text-xl font-semibold">
       Passionate Web Developer
     </h1>
