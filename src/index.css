@@ -107,30 +107,41 @@ body {
   font-family: var(--font-amiamie);
 }
 
-@utility clip-path {
-  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+*::selection
+{
+  color:hsl(40, 100%, 63%);
 }
 
-@utility banner-text-responsive {
-  @apply text-[68px] sm:text-[118px] md:text-[126px] lg:text-[152px] leading-9 sm:leading-16 lg:leading-20;
-}
+@utility container
+{
+  margin-inline:auto;
+  padding-inline:2rem;
 
-@utility value-text-responsive {
-  @apply text-2xl md:text-[26px] lg:text-[32px];
-}
-
-@utility marquee-text-responsive {
-  @apply text-[28px] sm:text-[36px] lg:text-[42px];
-}
-
-@utility contact-text-responsive {
-  @apply text-[42px] sm:text-[52px] md:text-[62px] lg:text-[100px];
+  @media (width >=640px){
+    max-width: 640px;
+  }
+  @media (width >= 768px){
+    max-width: 768px;
+  }
+  @media (width >= 1024px){
+    max-width: 1024px;
+  }
+  @media (width >=1280px){
+    max-width: 1280px;
+  }
+  @media (width >=1400px){
+    max-width: 1400px;
+  }
 }
 
 @layer utilities {
+  .through
+  {
+    text-decoration:line-through;
+  }
   .mouse-ovr::after
   {
-    @apply md:mr-6 md:mx-5;
+    @apply md:mr-6 md:mx-5 mx-4;
     content:"";
     position: absolute;
     top:80%;
@@ -140,28 +151,46 @@ body {
     width:0%;
     border-bottom: 4px solid #e5e5e0;
     transition: all 0.4s ease-in-out;
-}
+}  
+  .mouse-over:hover
+  {
+    @apply text-white;
+  }
   .mouse-ovr:hover::after
   {
-    @apply md:w-[45%] w-[70%];
+    @apply md:w-[80%];
     transform-origin: left;
   }
-  .mouse-ovr:nth-child(1):hover::after
-  {
-    @apply w-[50%] md:w-[35%];
-  }
-    .mouse-ovr:nth-child(2):hover::after
-  {
-    @apply w-[52%] md:w-[35%];
-  }
-    .mouse-ovr:nth-child(3):hover::after
-  {
-    @apply w-[70%] md:w-[47%];
-  }
+
   .gradient
   {
-    background: linear-gradient(to right, #ffb941, #dc7d09);
+    background: linear-gradient(to right,hsl(64, 22%, 75%), #d38e15);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+  .fill-up
+  {
+    color:black;
+  }
+  .fill-up::after
+  {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    background-color: black;
+    left: 0;
+    pointer-events: none;
+    top:100%;
+    z-index: -1;
+    transition: top 0.3s ease-in-out;
+  }
+  .fill-up:hover
+  {
+    color:white;
+  }
+  .fill-up:hover::after
+  {
+    top:0;
   }
 }

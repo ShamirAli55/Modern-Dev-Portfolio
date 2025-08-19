@@ -1,34 +1,43 @@
-import { useEffect ,useRef} from 'react'
-import gsap from 'gsap';
+import { Canvas } from "@react-three/fiber";
+import { Planet } from "../components/Planet";
+import { Environment, Float, Lightformer } from "@react-three/drei";
+import { useRef ,useEffect} from "react";
+import { useMediaQuery } from "react-responsive";
+import HeroText from "../components/HeroText";
+import HeroBtmText from "../components/HeroBtmText";
+import gsap from "gsap";
 
-const Hero = () => 
-{
-    const svgPathRef = useRef(null);
-    const stringRef = useRef(null);
-    const finalPath = "M 10 100 Q 10 100 350 100";
-    useEffect(() => {
-    const svgPath = svgPathRef.current;
+const Hero = () => {
+  const isMobile = useMediaQuery({ maxWidth: 853 });
+  const svgPathRefDesktop = useRef(null);
+  const stringRef = useRef(null);
+  const finalPathDesktop = "M 50 100 Q 10 100 840 100";
+ useEffect(() => {
     const stringEl = stringRef.current;
-
     const handleMove = (e) => {
-      let y = e.clientY ;
-      y = Math.max(0, Math.min(180, y));
+      let x = e.clientX;
+      let y = e.clientY;
+      y = Math.max(0, Math.min(200, y));
 
-      const path = `M 10 100 Q 10 ${y} 350 100`;
-
-      gsap.to(svgPath, {
-        attr: { d: path },
-        duration: 0.1,
-        ease: "power3.out",
-      });
+      if (svgPathRefDesktop.current) 
+      {
+       const path = `M 50 100 Q ${x} ${y} 840 100`;
+        gsap.to(svgPathRefDesktop.current, {
+          attr: { d: path },
+          duration: 0.1,
+          ease: "power3.out",
+        });
+      }
     };
 
     const handleLeave = () => {
-      gsap.to(svgPath, {
-        attr: { d: finalPath },
-        duration: 1.5,
-        ease: "elastic.out(1, 0.2)",
-      });
+      if (svgPathRefDesktop.current) {
+        gsap.to(svgPathRefDesktop.current, {
+          attr: { d: finalPathDesktop },
+          duration: 1.5,
+          ease: "elastic.out(1, 0.2)",
+        });
+      }
     };
 
     stringEl.addEventListener("mousemove", handleMove);
@@ -39,33 +48,85 @@ const Hero = () =>
       stringEl.removeEventListener("mouseleave", handleLeave);
     };
   }, []);
-
-    
   return (
-    <section className='min-h-screen w-full flex relative flex-col'>
-        <div className='w-full h-screen 
-        p-12 pt-0'>
-            <div className='tracking-widest py-8 font-amiamie'>
-            <h2 className='md:text-lg font-light'>404 NO LIMITS FOUND</h2>
-            </div>
-            <div className='uppercase text-6xl leading-17 pt-12  md:leading-20 md:text-9xl relative' ref={stringRef}>
-                <h1 className='tracking-wider'>Shamir <span className='block text-center -mr-40 leading-10 font-bold md:inline '>Ali</span></h1>
-                <div className='absolute top-15 cursor-grab'>
-                <svg width="1000" height="200">
-                <path d="M 10 100 Q 10 100 350 100" stroke="black" fill="transparent" ref={svgPathRef}/>
-                </svg></div>
-            </div>
-    <div className='p-4 text-xl border-l-4 border-black/60 my-20 tracking-wider 
-        md:border-0 md:text-5xl md:flex md:flex-col items-end md:tracking-widest 
-        md:leading-15 leading-10 uppercase'>
-      <h1 className='px-2 whitespace-nowrap'>Code with <span className='font-bold'>purpose</span></h1>
-      <h1 className='ml-14 whitespace-nowrap'>Animate with <span className='font-bold'>impact</span></h1>
-      <h1 className='ml-18 whitespace-nowrap'>Create that <span className='font-bold'>lasts</span></h1>
-    </div>
+    <section id="hero" className="min-h-screen w-full flex flex-col overflow-x-hidden relative">
+      <div className="font-amiamie h-[50vh] md:h-[65vh] w-full cursor-text">
+        <HeroText
+          sText={"404 NO LIMITS FOUND"}
+          mText1={"Shamir"}
+          mText2={"Ali"}
+        />
+        
+      <div
+        className="absolute top-[20%] cursor-grab md:top-[30.5%]"
+        ref={stringRef}
+      >
+        <svg
+          width="850"
+          height="160"
+          className="hidden md:inline-block pointer-events-none"
+        >
+          <path
+            d="M 50 100 Q 10 100 840 100"
+            stroke="black"
+            fill="transparent"
+            ref={svgPathRefDesktop}
+          />
+        </svg>
+      </div>
+      </div>
 
-        </div>
+      <HeroBtmText
+        heading1={"I help growing brands and startups gain an"}
+        heading2={"unfair advantage through premium"}
+        heading3={"results driven webs/apps"}
+      />
+
+      <figure
+        className="absolute inset-0 -z-50"
+        style={{ width: "100vw", height: "100vh" }}
+      >
+        <Canvas
+          shadows
+          camera={{ position: [0, 0, -10], fov: 17.5, near: 1, far: 20 }}
+          className="pointer-events-none"
+        >
+          <ambientLight intensity={0.5} />
+          <Float speed={0.5}>
+            <Planet scale={isMobile ? 0.7 : 1} />
+          </Float>
+          <Environment resolution={256}>
+            <group rotation={[-Math.PI / 3, 4, 1]}>
+              <Lightformer
+                form={"circle"}
+                intensity={2}
+                position={[0, 5, -9]}
+                scale={10}
+              />
+              <Lightformer
+                form={"circle"}
+                intensity={2}
+                position={[0, 3, 1]}
+                scale={10}
+              />
+              <Lightformer
+                form={"circle"}
+                intensity={2}
+                position={[-5, -1, -1]}
+                scale={10}
+              />
+              <Lightformer
+                form={"circle"}
+                intensity={2}
+                position={[10, 1, 0]}
+                scale={16}
+              />
+            </group>
+          </Environment>
+        </Canvas>
+      </figure>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
